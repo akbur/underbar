@@ -161,6 +161,12 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+      var startValue = arguments.length > 2;
+      var current = startValue ? accumulator : collection.shift();
+      _.each(collection, function(item, index) {
+        current = iterator(current, item);
+      });
+    return current;
   };
 
   // Determine if the array or object contains a given value (using `===`).
