@@ -106,7 +106,13 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
-    //might be better to write contains first
+    var results = [];
+    _.each(array, function(item) {
+      if (!_.contains(results, item)) {
+        results.push(item);
+      }
+    });
+    return results;
   };
 
 
