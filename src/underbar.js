@@ -194,8 +194,20 @@
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
-  _.some = function(collection, iterator) {
-    // TIP: There's a very clever way to re-use every() here.
+  _.some = function(collection, predicate) {
+    var any = false;
+    if (arguments.length === 1) {
+      var predicate = _.identity;
+    }
+    var collection = _.map(collection, function(item){
+      return [item];
+    });
+    _.each(collection, function(item) {
+    if (_.every(item, predicate)) {
+      any = true;
+      }
+    });
+    return any;
   };
 
   /**
@@ -229,7 +241,7 @@
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
-  _.defaults = function(obj) {
+  _.defaults = function(objectToExtend) {
   };
 
 
