@@ -229,7 +229,7 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(objectToExtend) {
-    var args = [].slice.call(arguments, 0);
+    var args = Array.prototype.slice.call(arguments);
     args.shift();
     _.each(args, function (object) {
       _.each(object, function (value, key) {
@@ -313,6 +313,11 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = Array.prototype.slice.call(arguments).slice(2);
+    //args = args.slice(2);
+    setInterval( function() {
+      func.apply(null, args);
+    }, wait);
   };
 
 
