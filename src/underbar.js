@@ -216,8 +216,15 @@
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function(obj) {
-
+  _.extend = function(objectToExtend) {
+    var args = [].slice.call(arguments, 0);
+    args.shift();
+    _.each(args, function (object) {
+      _.each(object, function (value, key) {
+        objectToExtend[key] = value;
+      });
+    });
+    return objectToExtend;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
