@@ -199,7 +199,7 @@
     if (arguments.length === 1) {
       var predicate = _.identity;
     }
-    var collection = _.map(collection, function(item){
+    var collection = _.map(collection, function(item) {
       return [item];
     });
     _.each(collection, function(item) {
@@ -242,7 +242,7 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(objectToExtend) {
-    var args = [].slice.call(arguments, 0);
+    var args = Array.prototype.slice.call(arguments);
     args.shift();
 
     _.each(args, function (object) {
@@ -286,7 +286,7 @@
     return function() {
       if (!alreadyCalled) {
         // TIP: .apply(this, arguments) is the standard way to pass on all of the
-        // infromation from one function call to another.
+        // information from one function call to another.
         result = func.apply(this, arguments);
         alreadyCalled = true;
       }
@@ -304,6 +304,17 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var results = {};
+
+    return function() {
+      var args = Array.prototype.slice.call(arguments);
+
+      if (args in results) {
+        return results[args];
+      } else {
+        return results[args] = func.apply(this, args);
+      }
+    }
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -314,8 +325,8 @@
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
     var args = Array.prototype.slice.call(arguments).slice(2);
-    setTimeout( function() {
-      func.apply(null, args);
+    return setTimeout( function() {
+      return func.apply(null, args);
     }, wait);
   };
 
