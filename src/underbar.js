@@ -38,11 +38,8 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-    if (n === 0) {
-      return [];
-    } else {
-      return n === undefined ? array[array.length-1] : array.slice(-n);
-    }
+    if (n === 0) return [];
+    return n === undefined ? array[array.length-1] : array.slice(-n);
   };
 
   // Call iterator(value, key, collection) for each element of collection.
@@ -308,7 +305,7 @@
 
     return function() {
       var args = Array.prototype.slice.call(arguments);
-
+ 
       if (args in results) {
         return results[args];
       } else {
@@ -391,6 +388,15 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+    var result = result || [];
+    _.each(nestedArray, function(item) {
+      if (!Array.isArray(item)) {
+        result.push(item);
+      } else {
+        _.flatten(item, result);
+      }
+    });
+    return result;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
