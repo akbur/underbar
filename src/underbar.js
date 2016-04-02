@@ -62,7 +62,7 @@
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
-  _.indexOf = function(array, target){
+  _.indexOf = function(array, target) {
     // TIP: Here's an example of a function that needs to iterate, which we've
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
@@ -80,7 +80,7 @@
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
     var results = [];
-    _.each(collection, function(item, index){
+    _.each(collection, function(item, index) {
       if (test(item)) {
         results.push(item);
       }
@@ -90,7 +90,7 @@
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
-    return _.filter(collection, function(item){
+    return _.filter(collection, function(item) {
       return !test(item);
     });
   };
@@ -113,7 +113,7 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     var results = [];
-    _.each(collection, function(item){
+    _.each(collection, function(item) {
       results.push(iterator(item));
     });
     return results;
@@ -132,7 +132,7 @@
     // TIP: map is really handy when you want to transform an array of
     // values into a new array of values. _.pluck() is solved for you
     // as an example of this.
-    return _.map(collection, function(item){
+    return _.map(collection, function(item) {
       return item[key];
     });
   };
@@ -228,7 +228,7 @@
   _.extend = function(objectToExtend) {
     var args = Array.prototype.slice.call(arguments);
     args.shift();
-    _.each(args, function (object) {
+    _.each(args, function(object) {
       _.each(object, function (value, key) {
         objectToExtend[key] = value;
       });
@@ -242,14 +242,14 @@
     var args = Array.prototype.slice.call(arguments);
     args.shift();
 
-    _.each(args, function (object) {
-      _.each(object, function (value, key) {
+    _.each(args, function(object) {
+      _.each(object, function(value, key) {
         var testKey = key;
         var contains = false;
         
         //loop through each key in object being extended
         //to see if it already contains the current key
-        _.each(objectToExtend, function (value, key) {
+        _.each(objectToExtend, function(value, key) {
           if (key === testKey) contains = true;
         });
 
@@ -311,7 +311,7 @@
       } else {
         return results[args] = func.apply(this, args);
       }
-    }
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -406,7 +406,7 @@
     var args = Array.prototype.slice.call(arguments);
     var array0 = args.shift();
     
-    _.each(array0, function(item){
+    _.each(array0, function(item) {
       var every = _.every(args, function(array) {
         return _.contains(array, item);
       });
